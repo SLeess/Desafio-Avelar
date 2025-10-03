@@ -1,0 +1,10 @@
+@import 'variables';
+
+@import 'bootstrap/scss/bootstrap';
+
+@import url('https://fonts.bunny.net/css?family=Nunito');
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+.bg-blue-avelar {
+    background-color: $blue-avelar !important;
+}

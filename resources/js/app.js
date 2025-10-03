@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(response => response.json())
                 .then(data => {
                     if (!data.erro) {
-                        document.getElementById('rua').value = data.logouro;
+                        document.getElementById('rua').value = data.logradouro;
                         document.getElementById('bairro').value = data.bairro;
                         document.getElementById('cidade').value = data.localidade;
                         // Para o select de UF, o ideal é apenas selecionar a opção correta

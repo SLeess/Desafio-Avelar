@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const cepElement = document.getElementById('cep');
     if (cepElement) {
-        Inputmask("99999-999").mask(cepElement);
+        Inputmask("99.999-999").mask(cepElement);
     }
 
     const dataElement = document.getElementById('data_nascimento');

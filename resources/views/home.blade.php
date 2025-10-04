@@ -1,55 +1,58 @@
 @extends('layouts.app')
-
 @section('content')
 <div class="container">
     <div class="card shadow-sm mb-5">
     <div class="card-header bg-blue-avelar text-white">
         <h2 class="h4 mb-0">Formulário de Cadastro</h2>
     </div>
-
     <div class="card-body p-4">
-        <form action="#" method="POST" enctype="multipart/form-data" novalidate>
+        <form action="{{route('cadastro.store')}}" method="POST" enctype="multipart/form-data" novalidate>
             @csrf
             <div class="row g-3">
 
                 <div class="col-12 col-md-7">
                     <label for="nome" class="form-label">Nome Completo</label>
-                    <input type="text" class="form-control" id="nome" name="nome" required>
+                    <input type="text" class="form-control @error('nome') is-invalid @enderror" id="nome" name="nome" required value="{{ old('nome') }}">
                     @error('nome') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                 </div>
 
 
                 <div class="offset-0 offset-md-2 col-md-1">
                     <label for="idade" class="form-label">Idade</label>
-                    <input type="number" class="form-control" id="idade" name="idade" required>
+                    <input type="number" class="form-control @error('idade') is-invalid @enderror" id="idade" name="idade" required min="1" value="{{ old('idade') }}">
+                    @error('idade') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                 </div>
 
                 <div class="col-md-2">
                     <label for="salario" class="form-label">Salário (R$)</label>
-                    <input type="text" class="form-control" id="salario" name="salario" placeholder="R$ 2.000,00" required>
+                    <input type="text" class="form-control @error('salario') is-invalid @enderror" id="salario" name="salario" placeholder="R$ 2.000,00" value="{{ old('salario') }}" required>
+                    @error('salario') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                 </div>
 
                 <div class="col-md-3">
                     <label for="sexo" class="form-label">Sexo</label>
-                    <select class="form-select" id="sexo" name="sexo" required>
-                        <option value="" selected disabled>Selecione...</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="feminino">Feminino</option>
-                        <option value="outro">Outro</option>
+                    <select class="form-select @error('sexo') is-invalid @enderror" id="sexo" name="sexo" required>
+                        <option value="" disabled>Selecione...</option>
+                        <option @if(old('sexo') == 'masculino') selected @endif value="masculino">Masculino</option>
+                        <option @if(old('sexo') == 'feminino') selected @endif value="feminino">Feminino</option>
+                        <option @if(old('sexo') == 'outro') selected @endif value="outro">Outro</option>
                     </select>
+                    @error('sexo') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                 </div>
 
                 <div class="mt-5 col-12">
                     <label for="anexo" class="form-label">Anexo (PDF, JPG, PNG - Máx 10MB)</label>
-                    <input class="form-control" type="file" id="anexo" name="anexo" accept=".pdf,.jpg,.jpeg,.png">
+                    <input class="form-control @error('anexo') is-invalid @enderror" type="file" id="anexo" name="anexo" accept=".pdf,.jpg,.jpeg,.png">
+                    @error('anexo') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                 </div>
 
                 <div class="col-12">
                     <div class="form-check mt-2">
-                        <input class="form-check-input" type="checkbox" id="ensino_medio" name="ensino_medio" value="1">
+                        <input class="form-check-input @error('ensino-medio') is-invalid @enderror" type="checkbox" id="ensino_medio" name="ensino_medio" value="1" @if(old('ensino_medio') == '1') checked @endif>
                         <label class="form-check-label" for="ensino_medio">
                             Possui Ensino Médio Completo
                         </label>
+                        @error('ensino_medio') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
                     </div>
                 </div>
             </div>
@@ -60,7 +63,7 @@
                     <label for="cep">CEP</label>
 
                     <input type="text" id="cep" class="form-control @error('cep') is-invalid @enderror" name="cep"
-                        data-mask="00000-000" placeholder="ex.: 39404-000" value="{{ old('cep') }}">
+                        data-mask="00.000-000" placeholder="ex.: 39.404-000" value="{{ old('cep') }}">
                     @error('cep')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -236,21 +239,21 @@
 @push('scripts')
 <script>
 
-    const cepMask = IMask(document.getElementById('cep'), {
-        mask: '00000-000'
-    });
-    const salarioMask = IMask(document.getElementById('salario'), {
-        mask: 'R$ num',
-        blocks: {
-            num: {
-                mask: Number,
-                thousandsSeparator: '.',
-                radix: ',',
-                scale: 2,
-                padFractionalZeros: true
-            }
-        }
-    });
+    // const cepMask = IMask(document.getElementById('cep'), {
+    //     mask: '00.000-000'
+    // });
+    // const salarioMask = IMask(document.getElementById('salario'), {
+    //     mask: 'R$ num',
+    //     blocks: {
+    //         num: {
+    //             mask: Number,
+    //             thousandsSeparator: '.',
+    //             radix: ',',
+    //             scale: 2,
+    //             padFractionalZeros: true
+    //         }
+    //     }
+    // });
 
     const confirmDeleteModal = document.getElementById('confirmDeleteModal');
     confirmDeleteModal.addEventListener('show.bs.modal', function (event) {

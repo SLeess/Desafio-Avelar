@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('dados', function (Blueprint $table) {
             $table->id();
             $table->string('nome', 150);
-            $table->string('cpf', 11);
+            // $table->string('cpf', 11);
             $table->integer('idade');
             $table->string('cep', 13);
             $table->string('cidade', 100);
             $table->string('estado', 2);
             $table->string('rua', 150);
+            $table->string('numero', 20)->nullable();
+            $table->string('complemento', 100)->nullable();
             $table->string('bairro', 100);
             $table->tinyInteger('ensino_medio');
             $table->string('sexo', 20);

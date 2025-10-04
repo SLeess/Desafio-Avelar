@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CadastroRequest;
 use App\Interfaces\Cadastro\ICadastroService;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class CadastroController extends Controller
 {

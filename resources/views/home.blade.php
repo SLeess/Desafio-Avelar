@@ -1,6 +1,16 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
+    @if ($errors->any())
+    {{-- @dd($errors) --}}
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="card shadow-sm mb-5">
     <div class="card-header bg-blue-avelar text-white">
         <h2 class="h4 mb-0">Formulário de Cadastro</h2>
@@ -147,13 +157,11 @@
 
 </div>
 
-<div class="card shadow-sm">
+{{-- <div class="card shadow-sm">
     <div class="card-header bg-light d-flex justify-content-between align-items-center">
         <h2 class="h4 mb-0">Registros Cadastrados</h2>
-        {{-- Aqui você pode adicionar filtros ou um campo de busca --}}
     </div>
     <div class="card-body">
-        {{-- Simulando dados vindos do Controller. No seu código, use a variável real --}}
         @php
             $registros = [
                 (object)['id' => 1, 'nome' => 'Ana Silva', 'idade' => 28, 'cidade' => 'São Paulo'],
@@ -181,7 +189,6 @@
                                 <td>{{ $registro->idade }}</td>
                                 <td>{{ $registro->cidade }}</td>
                                 <td class="text-center">
-                                    {{-- Altere as rotas para as suas rotas de edit e destroy --}}
                                     <a href="#" class="btn btn-sm btn-outline-primary me-1" title="Editar">
                                         <i class="bi bi-pencil-square fs-8"></i>
                                     </a>
@@ -193,7 +200,6 @@
                                         data-bs-target="#confirmDeleteModal"
                                         data-delete-url="#"
                                     >
-                                        {{-- No data-delete-url, passe a rota de exclusão: {{ route('sua.rota.destroy', $registro->id) }} --}}
                                         <i class="bi bi-trash3 fs-8"></i>
                                     </button>
                                 </td>
@@ -208,8 +214,8 @@
             </div>
         @endif
     </div>
-</div>
-
+</div> --}}
+@include('components.cadastrados')
 
 <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
   <div class="modal-dialog">

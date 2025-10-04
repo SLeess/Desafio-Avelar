@@ -13,7 +13,10 @@ Route::get('/', function () {
 Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/desafio-avelar', [Controller::class, 'index'])->name('desafio.avelar.index');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::post('/cadastrar', [CadastroController::class, 'store'])->name('cadastro.store');
+    Route::resource('/cadastros', CadastroController::class)
+        ->only(['store', 'edit', 'update', 'destroy'])
+        ->parameters(['cadastros' => 'cadastro'])
+        ->names('cadastro');
 });
 
 

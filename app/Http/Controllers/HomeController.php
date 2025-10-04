@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $registros = DB::select('SELECT * FROM dados ORDER BY id DESC');
+
+        return view('home', [
+            'registros' => $registros
+        ]);
     }
 }

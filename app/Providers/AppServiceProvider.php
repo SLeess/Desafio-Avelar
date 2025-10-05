@@ -13,6 +13,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(\App\Interfaces\Cadastro\ICadastroService::class, \App\Services\Cadastro\CadastroService::class);
+        $this->app->bind(\App\Interfaces\Estatisticas\IEstatisticasService::class, \App\Services\Estatisticas\EstatisticasService::class);
     }
 
     /**

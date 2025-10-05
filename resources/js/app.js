@@ -5,6 +5,7 @@ import jQuery from 'jquery';
 import toastr from 'toastr';
 import Swal from 'sweetalert2';
 import Inputmask from "inputmask";
+import Chart from 'chart.js/auto';
 
 import 'toastr/build/toastr.min.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
@@ -14,6 +15,7 @@ window.$ = jQuery;
 window.toastr = toastr;
 window.Swal = Swal;
 window.Inputmask = Inputmask;
+window.Chart = Chart;
 
 
 toastr.options = {

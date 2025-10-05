@@ -26,7 +26,7 @@ class HomeController extends Controller
     {
         $registros = DB::select('SELECT * FROM dados ORDER BY id DESC');
 
-        return view('home', [
+        return view('pages.cadastros.index', [
             'registros' => $registros
         ]);
     }

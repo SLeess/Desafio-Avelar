@@ -6,7 +6,7 @@
             <span class="input-group-text"><i class="bi bi-person"></i></span>
             <div class="form-floating">
                 <input type="text" class="form-control @error('nome') is-invalid @enderror" id="nome" name="nome" value="{{ old('nome', $registro->nome ?? '') }}" placeholder="Nome Completo" required>
-                <label for="nome">Nome Completo</label>
+                <label for="nome">Nome Completo *</label>
             </div>
         </div>
         @error('nome') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
@@ -16,7 +16,7 @@
     <div class="col-md-3">
         <div class="form-floating">
             <input type="number" class="form-control @error('idade') is-invalid @enderror" id="idade" name="idade" value="{{ old('idade', $registro->idade ?? '') }}" placeholder="Idade" required min="1">
-            <label for="idade">Idade</label>
+            <label for="idade">Idade *</label>
         </div>
             @error('idade') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
     </div>
@@ -35,7 +35,7 @@
                 <option value="feminino" @if(old('sexo', $registro->sexo ?? '') == 'feminino') selected @endif>Feminino</option>
                 <option value="outro" @if(old('sexo', $registro->sexo ?? '') == 'outro') selected @endif>Outro</option>
             </select>
-            <label for="sexo">Sexo</label>
+            <label for="sexo">Sexo *</label>
         </div>
         @error('sexo') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
     </div>
@@ -56,7 +56,7 @@
 
     {{-- Linha 3: Anexo e Checkbox --}}
     <div class="col-md-9">
-        <label for="anexo" class="form-label small text-muted">Anexo (PDF, JPG, PNG - Máx 10MB)</label>
+        <label for="anexo" class="form-label small text-muted">Anexo (PDF, JPG, PNG - Máx 10MB) *</label>
         <input class="form-control @error('anexo') is-invalid @enderror" type="file" id="anexo" name="anexo" accept=".pdf,.jpg,.jpeg,.png">
         @error('anexo') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
     </div>
@@ -64,7 +64,7 @@
     <div class="col-md-3 d-flex align-items-center justify-content-center pt-3">
         <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" id="ensino_medio" name="ensino_medio" value="1" @if(old('ensino_medio', $registro->ensino_medio ?? '') == '1') checked @endif>
-            <label class="form-check-label" for="ensino_medio">Ensino Médio</label>
+            <label class="form-check-label" for="ensino_medio">Ensino Médio *</label>
         </div>
     </div>
 </div>
@@ -77,14 +77,14 @@
     <div class="col-md-3">
         <div class="form-floating">
             <input type="text" id="cep" class="form-control @error('cep') is-invalid @enderror" name="cep" value="{{ old('cep', $registro->cep ?? '') }}" placeholder="CEP">
-            <label for="cep">CEP</label>
+            <label for="cep">CEP *</label>
         </div>
         @error('cep') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
     </div>
     <div class="col-md-9">
             <div class="form-floating">
             <input type="text" id="rua" class="form-control @error('rua') is-invalid @enderror" name="rua" value="{{ old('rua', $registro->rua ?? '') }}" placeholder="Rua">
-            <label for="rua">Rua</label>
+            <label for="rua">Rua *</label>
         </div>
         @error('rua') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
     </div>
@@ -93,7 +93,7 @@
     <div class="col-md-3">
         <div class="form-floating">
             <input type="text" class="form-control @error('numero') is-invalid @enderror" name="numero" value="{{ old('numero', $registro->numero ?? '') }}" placeholder="Nº">
-            <label for="numero">Nº</label>
+            <label for="numero">Nº *</label>
         </div>
         @error('numero') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
     </div>
@@ -109,14 +109,14 @@
         <div class="col-md-5">
             <div class="form-floating">
             <input type="text" id="bairro" class="form-control @error('bairro') is-invalid @enderror" name="bairro" value="{{ old('bairro', $registro->bairro ?? '') }}" placeholder="Bairro">
-            <label for="bairro">Bairro</label>
+            <label for="bairro">Bairro *</label>
         </div>
         @error('bairro') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
     </div>
     <div class="col-md-5">
             <div class="form-floating">
             <input type="text" id="cidade" class="form-control @error('cidade') is-invalid @enderror" name="cidade" value="{{ old('cidade', $registro->cidade ?? '') }}" placeholder="Cidade">
-            <label for="cidade">Cidade</label>
+            <label for="cidade">Cidade *</label>
         </div>
         @error('cidade') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
     </div>
@@ -126,7 +126,7 @@
                 <option value="" @if(!old('uf')) selected @endif disabled>Selecione</option>
                 @include('components.estados', ['inputName' => 'uf', 'value' => $registro->estado ?? null])
             </select>
-            <label for="uf">Estado</label>
+            <label for="uf">Estado *</label>
         </div>
         @error('uf') <div class="invalid-feedback d-block">{{ $message }}</div> @enderror
     </div>

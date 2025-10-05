@@ -34,7 +34,7 @@ class CadastroRequest extends FormRequest
         return [
             "nome" => 'required|string|min:3|max:150',
             "idade" => 'required|integer|min:1',
-            "salario" => 'numeric|between:0,999999.99',
+            "salario" => 'nullable|numeric|between:0,999999.99',
             "sexo" => 'required|in:masculino,feminino,outro|string',
             "anexo" => 'file|nullable|mimes:pdf,jpg,jpeg,png|max:10240',
             "ensino_medio" => 'nullable',

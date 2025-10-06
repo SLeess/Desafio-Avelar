@@ -42,6 +42,10 @@
                         </tbody>
                     </table>
                 </div>
+                {{-- PAGINAÇÃO --}}
+                <div class="d-flex justify-content-center mt-3">
+                    {!! $registros->links() !!}
+                </div>
             @else
                 <div class="alert alert-info text-center">
                     Nenhum registro encontrado.

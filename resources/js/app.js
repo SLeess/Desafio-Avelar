@@ -1,4 +1,20 @@
 import './bootstrap';
+import '../sass/app.scss';
+
+const globalLoader = document.getElementById('global-loader');
+
+window.showLoader = function() {
+    if (globalLoader) {
+        globalLoader.classList.remove('d-none');
+    }
+}
+
+window.hideLoader = function() {
+    if (globalLoader) {
+        globalLoader.classList.add('d-none');
+    }
+}
+
 import 'bootstrap';
 
 import jQuery from 'jquery';
@@ -9,7 +25,6 @@ import Chart from 'chart.js/auto';
 
 import 'toastr/build/toastr.min.css';
 import 'sweetalert2/dist/sweetalert2.min.css';
-import '../sass/app.scss';
 
 window.$ = jQuery;
 window.toastr = toastr;
@@ -103,6 +118,35 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     }
+
+    const forms = document.querySelectorAll('form[method="POST"]');
+    forms.forEach(form => {
+        form.addEventListener('submit', function() {
+            // Adiciona um pequeno delay para o caso de a validação do navegador falhar
+            setTimeout(() => showLoader(), 100);
+        });
+    });
+
+    const links = document.querySelectorAll('a[href]');
+    links.forEach(link => {
+        link.addEventListener('click', function(event) {
+            const href = this.getAttribute('href');
+            const target = this.getAttribute('target');
+
+            // Não aciona o loader para links que abrem em nova aba,
+            // links de âncora (#) ou links de javascript.
+            if (href && !href.startsWith('#') && !href.startsWith('javascript:') && target !== '_blank') {
+                showLoader();
+            }
+        });
+    });
+
+    window.addEventListener('pageshow', function(event) {
+        // O "persisted" indica que a página foi carregada do cache do navegador (ex: ao voltar)
+        if (event.persisted) {
+            hideLoader();
+        }
+    });
 
     // =====================================================================
     // LÓGICA DO TOASTR PARA MENSAGENS DE SESSÃO DO LARAVEL

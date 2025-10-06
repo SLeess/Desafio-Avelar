@@ -93,7 +93,7 @@
             </div>
             <div class="col-lg-4 mb-4">
                 <div class="card shadow-sm">
-                    <div class="card-header py-3"><h6 class="m-0 fw-bold text-info">Nível de Escolaridade</h6></div>
+                    <div class="card-header py-3"><h6 class="m-0 fw-bold text-info">Nível de Escolaridade - Ensino Médio</h6></div>
                     <div class="card-body"><canvas id="graficoEnsinoMedio" style="height: 250px;"></canvas></div>
                 </div>
             </div>

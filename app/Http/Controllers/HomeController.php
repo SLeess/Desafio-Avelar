@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class HomeController extends Controller
 {
@@ -24,8 +26,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $registros = DB::select('SELECT * FROM dados ORDER BY id DESC');
+        $perPage = 5;
 
+        $currentPage = Paginator::resolveCurrentPage('page');
+
+        $total = DB::selectOne('SELECT COUNT(*) as total FROM dados')->total;
+
+        $offset = ($currentPage - 1) * $perPage;
+
+        $items = DB::select("SELECT * FROM dados ORDER BY id DESC LIMIT ? OFFSET ?", [$perPage, $offset]);
+
+        $registros = new LengthAwarePaginator(
+            $items,                // Os itens da página atual
+            $total,                // O total de itens
+            $perPage,            // Itens por página
+            $currentPage,    // A página atual
+            [
+                'path' => Paginator::resolveCurrentPath(),
+            ]
+        );
         return view('pages.cadastros.index', [
             'registros' => $registros
         ]);

@@ -15,28 +15,6 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    <style>
-        .loader-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1070;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(2px);
-
-            opacity: 1;
-            transition: opacity 0.3s ease;
-        }
-
-        .loader-overlay.d-none {
-            opacity: 0;
-        }
-    </style>
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
     @stack('styles')

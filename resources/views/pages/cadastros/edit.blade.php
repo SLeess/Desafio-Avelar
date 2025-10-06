@@ -1,5 +1,41 @@
 @extends('layouts.app')
 
+@push('styles')
+    <style>
+          .loader-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1070;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* O fundo agora é transparente, o spinner fica sobre a página antiga */
+    background-color: transparent;
+
+    /* Garante que o loader não bloqueie a página se estiver escondido */
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Quando o body tiver a classe .is-loading, o overlay e o spinner aparecem */
+body.is-loading .loader-overlay {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Deixa o conteúdo principal semi-transparente durante a navegação */
+body.is-loading > #app {
+    opacity: 0.5;
+    filter: blur(2px);
+}
+    </style>
+@endpush
+
 @section('content')
 <div class="container">
     <div class="card shadow-sm mb-5 form-card-custom">

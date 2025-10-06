@@ -13,6 +13,26 @@
         transform: translateY(-5px);
         transition: transform 0.2s ease-in-out;
     }
+    .loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1070;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(255, 255, 255, 0.5);
+        backdrop-filter: blur(2px);
+
+        opacity: 1;
+        transition: opacity 0.3s ease;
+    }
+
+    .loader-overlay.d-none {
+        opacity: 0;
+    }
 </style>
 @endpush
 

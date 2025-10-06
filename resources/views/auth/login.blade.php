@@ -48,7 +48,7 @@
 <div class="container d-flex align-items-center justify-content-center" style="min-height: 80vh;">
     <div class="col-md-6 col-lg-5 col-xl-4">
         <div class="card card-glass border-0">
-            <div class="card-body p-4 p-md-5">
+            <div class="card-body p-4 p-md-5" style="background-color: white;">
                 <div class="mb-4 text-center">
                     <img src="{{asset('images/logo_somente_A.jpg')}}" style="width: 130px;" alt="">
                 </div>

@@ -1,3 +1,5 @@
+# O projeto está em deploy na seguinte URL: http://163.176.220.161/
+
 # 🎓 Desafio Avelar
 
 Seja bem-vindo ao **Desafio Avelar**! 🚀  

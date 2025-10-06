@@ -50,9 +50,14 @@ class CadastroRequest extends FormRequest
 
     /**
      * Função auxiliar para limpar a string do salário.
+     * Transforma "R$ 3.000,00" em "3000.00"
      */
     private function cleanSalario(string $salario): string
     {
-        return str_replace(['.', ','], ['', '.'], preg_replace('/[^\d,.]/', '', $salario));
+        $salario = preg_replace('/[^\d,.]/', '', $salario);
+        $salario = str_replace('.', '', $salario);
+        $salario = str_replace(',', '.', $salario);
+
+        return $salario;
     }
 }

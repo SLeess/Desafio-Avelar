@@ -20,30 +20,20 @@ class CadastroController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-   public function index()
+   public function index(Request $request)
     {
-        $perPage = 5;
+        try {
+            $registros = $this->cadastroService->indexCadastros($request);
 
-        $currentPage = Paginator::resolveCurrentPage('page');
+            return view('pages.cadastros.index', [
+                'registros' => $registros
+            ]);
+        } catch (Exception $e) {
+            Log::error('Erro ao criar cadastro: ' . $e->getMessage());
 
-        $total = DB::selectOne('SELECT COUNT(*) as total FROM dados')->total;
-
-        $offset = ($currentPage - 1) * $perPage;
-
-        $items = DB::select("SELECT * FROM dados ORDER BY id DESC LIMIT ? OFFSET ?", [$perPage, $offset]);
-
-        $registros = new LengthAwarePaginator(
-            $items,                // Os itens da página atual
-            $total,                // O total de itens
-            $perPage,            // Itens por página
-            $currentPage,    // A página atual
-            [
-                'path' => Paginator::resolveCurrentPath(),
-            ]
-        );
-        return view('pages.cadastros.index', [
-            'registros' => $registros
-        ]);
+            return redirect()->view('welcome')
+                ->withErrors(['error' => 'Ocorreu um erro ao salvar o cadastro. Tente novamente.']);
+        }
 
     }
 

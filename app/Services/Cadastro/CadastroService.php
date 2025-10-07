@@ -5,9 +5,49 @@ namespace App\Services\Cadastro;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Storage;
 
 class CadastroService implements \App\Interfaces\Cadastro\ICadastroService{
+
+    public function indexCadastros(Request $request): LengthAwarePaginator{
+        $busca = $request->get('busca');
+
+        $query = "SELECT * FROM dados";
+        $countQuery = "SELECT COUNT(*) as total FROM dados";
+        $bindings = [];
+
+        if ($busca) {
+            $query .= " WHERE nome LIKE ?";
+            $countQuery .= " WHERE nome LIKE ?";
+            $bindings[] = '%' . $busca . '%'; // Adiciona os '%' para buscar em qualquer parte do nome
+        }
+
+        $query .= " ORDER BY id DESC";
+
+
+        $perPage = 5;
+        $currentPage = Paginator::resolveCurrentPage('page');
+
+        $total = DB::selectOne($countQuery, $bindings)->total;
+
+        $offset = ($currentPage - 1) * $perPage;
+
+        $query .= " LIMIT ? OFFSET ?";
+        $paginationBindings = array_merge($bindings, [$perPage, $offset]);
+
+        $items = DB::select($query, $paginationBindings);
+
+        return new LengthAwarePaginator(
+            $items,
+            $total,
+            $perPage,
+            $currentPage,
+            ['path' => Paginator::resolveCurrentPath()]
+        );
+    }
     public function storeCadastro(array $data){
         try {
             $pathAnexo = $data['anexo']->store('anexos', 'public');
@@ -66,14 +106,6 @@ class CadastroService implements \App\Interfaces\Cadastro\ICadastroService{
         }
     }
 
-    /**
-     * Atualiza um registro de cadastro no banco de dados.
-     *
-     * @param array $data Dados validados do formulário.
-     * @param string $id O ID do registro a ser atualizado.
-     * @return bool
-     * @throws Exception
-     */
     public function updateCadastro(array $data, string $id): bool
     {
         try {

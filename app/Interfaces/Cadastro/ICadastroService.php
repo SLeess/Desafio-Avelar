@@ -2,9 +2,18 @@
 
 namespace App\Interfaces\Cadastro;
 
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Exception;
 
 interface ICadastroService{
+
+    /**
+     * Busca e pagina itens pesquisados de cadastrados
+     * @param \Illuminate\Http\Request $request
+     * @return void
+     */
+    public function indexCadastros(Request $request): LengthAwarePaginator;
 
     /**
      * Salva um novo registro de cadastro no banco de dados.

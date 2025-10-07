@@ -1,7 +1,17 @@
 <div class="card shadow-sm">
-        <div class="card-header bg-light">
+        <div class="card-header bg-light d-flex flex-wrap justify-content-between align-items-center gap-3">
             <h2 class="h4 mb-0">Registros Cadastrados</h2>
+
+            <form action="{{ route('cadastro.index') }}" method="GET" class="d-flex">
+                <div class="input-group">
+                    <input type="text" class="form-control" name="busca" placeholder="Buscar por nome..." value="{{ request()->get('busca') }}">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
         </div>
+
         <div class="card-body">
             @if(count($registros) > 0)
                 <div class="table-responsive">
@@ -42,9 +52,8 @@
                         </tbody>
                     </table>
                 </div>
-                {{-- PAGINAÇÃO --}}
                 <div class="d-flex justify-content-center mt-3">
-                    {!! $registros->links() !!}
+                    {!! $registros->appends(request()->except('page'))->links() !!}
                 </div>
             @else
                 <div class="alert alert-info text-center">

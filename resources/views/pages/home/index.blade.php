@@ -16,7 +16,7 @@
     border-radius: 0 var(--bs-border-radius) var(--bs-border-radius) 0 !important;
 }
 .form-card-custom {
-    max-width: 900px;
+    /* max-width: 900px; */
     margin-left: auto;
     margin-right: auto;
 }

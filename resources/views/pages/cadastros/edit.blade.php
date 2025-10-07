@@ -73,7 +73,7 @@ body.is-loading > #app {
     <div class="card shadow-sm mb-5 form-card-custom">
         <div class="card-header bg-blue-avelar text-white d-flex justify-content-between align-items-center">
             <h2 class="h4 mb-0">Editando Cadastro: {{ $registro->nome }}</h2>
-            <a href="{{ route('home') }}" class="btn btn-outline-light btn-sm">Voltar para a lista</a>
+            <a href="{{ route('cadastro.index') }}" class="btn btn-outline-light btn-sm">Voltar para a lista</a>
         </div>
 
         <div class="card-body p-4">

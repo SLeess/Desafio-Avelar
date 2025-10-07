@@ -21,7 +21,8 @@
     margin-right: auto;
 }
 .loader-overlay {
-    position: fixed;
+    display: none;
+    /* position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -31,10 +32,9 @@
     align-items: center;
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.5);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px); */
 
-    opacity: 1;
-    transition: opacity 0.3s ease;
+    /* */
 }
 
 .loader-overlay.d-none {
@@ -45,45 +45,6 @@
 
 @section('content')
 <div class="container">
-    @if ($errors->any())
-    {{-- @dd($errors) --}}
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <div class="card shadow-sm mb-5 form-card-custom">
-        <button class="card-header bg-blue-avelar text-white text-start w-100 border-0"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#formCollapse"
-                aria-expanded="true"
-                aria-controls="formCollapse">
-            <div class="d-flex justify-content-between align-items-center">
-                <h2 class="h4 mb-0">Formulário de Cadastro</h2>
-                <i class="bi bi-chevron-down collapse-icon"></i>
-            </div>
-        </button>
-
-        <div class="collapse show" id="formCollapse">
-            <div class="card-body p-4">
-                <form action="{{route('cadastro.store')}}" method="POST" enctype="multipart/form-data" novalidate>
-                    @csrf
-                    @include("pages.cadastros.partials.form")
-
-                    <div class="d-flex justify-content-end mt-4">
-                        <button type="submit" class="btn btn-primary btn-md px-4">
-                            <i class="bi bi-check-lg me-2"></i>Salvar
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-    </div>
 
 
 @include('components.cadastrados')

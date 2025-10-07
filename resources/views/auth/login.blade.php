@@ -41,6 +41,28 @@
     .card-glass input{
         font-size: 15px;
     }
+    .loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1070;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.4); // Fundo escuro semitransparente
+        backdrop-filter: blur(3px);
+
+        opacity: 1;
+        transition: opacity 0.3s ease;
+        pointer-events: auto;
+    }
+
+    .loader-overlay.d-none {
+        opacity: 0;
+        pointer-events: none; // Garante que não bloqueie cliques quando escondido
+    }
 </style>
 @endpush
 @section('content')

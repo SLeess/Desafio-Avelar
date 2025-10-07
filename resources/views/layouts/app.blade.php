@@ -36,7 +36,10 @@
                     <ul class="navbar-nav mx-auto">
                         @auth
                             <li class="nav-item">
-                                <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Cadastro</a>
+                                <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Cadastre-se</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->routeIs('cadastro.index') ? 'active' : '' }}" href="{{ route('cadastro.index') }}">Cadastrados</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link {{ request()->routeIs('estatisticas.index') ? 'active' : '' }}" href="{{ route('estatisticas.index') }}">Estatísticas</a>

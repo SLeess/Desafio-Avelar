@@ -6,12 +6,46 @@ use App\Http\Requests\CadastroRequest;
 use App\Interfaces\Cadastro\ICadastroService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class CadastroController extends Controller
 {
     public function __construct(protected ICadastroService $cadastroService){}
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+   public function index()
+    {
+        $perPage = 5;
+
+        $currentPage = Paginator::resolveCurrentPage('page');
+
+        $total = DB::selectOne('SELECT COUNT(*) as total FROM dados')->total;
+
+        $offset = ($currentPage - 1) * $perPage;
+
+        $items = DB::select("SELECT * FROM dados ORDER BY id DESC LIMIT ? OFFSET ?", [$perPage, $offset]);
+
+        $registros = new LengthAwarePaginator(
+            $items,                // Os itens da página atual
+            $total,                // O total de itens
+            $perPage,            // Itens por página
+            $currentPage,    // A página atual
+            [
+                'path' => Paginator::resolveCurrentPath(),
+            ]
+        );
+        return view('pages.cadastros.index', [
+            'registros' => $registros
+        ]);
+
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -21,7 +55,7 @@ class CadastroController extends Controller
         try {
             $cadastro = $this->cadastroService->storeCadastro($request->validated());
 
-            return redirect()->route('home')->withErrors(['success' => 'Cadastro realizado com Sucesso!']);
+            return redirect()->route('home')->with('success', 'Cadastro realizado com Sucesso!');
         } catch (Exception $e) {
             Log::error('Erro ao criar cadastro: ' . $e->getMessage());
 
@@ -52,7 +86,7 @@ class CadastroController extends Controller
     {
         try {
             $this->cadastroService->updateCadastro($request->validated(), $id);
-            return redirect()->route('home')->withErrors(['success' => 'Cadastro atualizado com Sucesso!']);
+            return redirect()->route('home')->with('success', 'Cadastro atualizado com Sucesso!');
         } catch (Exception $e) {
             Log::error('Erro ao atualizar cadastro: ' . $e->getMessage());
             return redirect()->back()
@@ -68,7 +102,7 @@ class CadastroController extends Controller
     {
         try {
             $this->cadastroService->deleteCadastro($id);
-            return redirect()->route('home')->withErrors(['success' => 'Registro excluído com sucesso!']);
+            return redirect()->route('home')->with('success', 'Registro excluído com sucesso!');
         } catch (Exception $e) {
             Log::error("Erro ao excluir cadastro (ID: $id): " . $e->getMessage());
             return redirect()->route('home')->withErrors(['error' => 'Ocorreu um erro ao excluir o registro.']);

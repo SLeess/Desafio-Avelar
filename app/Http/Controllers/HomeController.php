@@ -26,27 +26,29 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $perPage = 5;
+        // $perPage = 5;
 
-        $currentPage = Paginator::resolveCurrentPage('page');
+        // $currentPage = Paginator::resolveCurrentPage('page');
 
-        $total = DB::selectOne('SELECT COUNT(*) as total FROM dados')->total;
+        // $total = DB::selectOne('SELECT COUNT(*) as total FROM dados')->total;
 
-        $offset = ($currentPage - 1) * $perPage;
+        // $offset = ($currentPage - 1) * $perPage;
 
-        $items = DB::select("SELECT * FROM dados ORDER BY id DESC LIMIT ? OFFSET ?", [$perPage, $offset]);
+        // $items = DB::select("SELECT * FROM dados ORDER BY id DESC LIMIT ? OFFSET ?", [$perPage, $offset]);
 
-        $registros = new LengthAwarePaginator(
-            $items,                // Os itens da página atual
-            $total,                // O total de itens
-            $perPage,            // Itens por página
-            $currentPage,    // A página atual
-            [
-                'path' => Paginator::resolveCurrentPath(),
-            ]
-        );
-        return view('pages.cadastros.index', [
-            'registros' => $registros
-        ]);
+        // $registros = new LengthAwarePaginator(
+        //     $items,                // Os itens da página atual
+        //     $total,                // O total de itens
+        //     $perPage,            // Itens por página
+        //     $currentPage,    // A página atual
+        //     [
+        //         'path' => Paginator::resolveCurrentPath(),
+        //     ]
+        // );
+        // return view('pages.cadastros.index', [
+        //     'registros' => $registros
+        // ]);
+
+        return view('pages.home.index');
     }
 }

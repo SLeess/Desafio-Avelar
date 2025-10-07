@@ -14,7 +14,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/desafio-avelar', [App\Http\Controllers\HomeController::class, 'index'])->name(name: 'desafio.avelar.index');
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::resource('/cadastros', CadastroController::class)
-        ->except(['index', 'show', 'create'])
+        ->except([ 'show', 'create'])
         ->parameters(['cadastros' => 'cadastro'])
         ->names('cadastro');
     Route::get('/estatisticas', [EstatisticasController::class, 'index'])->name('estatisticas.index');
